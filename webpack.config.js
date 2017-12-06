@@ -1,4 +1,5 @@
 const path = require('path');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OpenUI5Plugin = require('openui5-webpack-plugin');
@@ -99,8 +100,9 @@ module.exports = {
 				context: path.resolve(__dirname, 'bower_components/openui5-themelib_sap_belize/resources')
 			}
 		]),
-		new webpack.optimize.UglifyJsPlugin({
-			sourceMap: true
+		new BundleAnalyzerPlugin({
+			analyzerMode: 'static',
+			generateStatsFile: true
 		})
 	],
 	devtool: 'source-map'
