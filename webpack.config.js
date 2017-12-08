@@ -18,7 +18,7 @@ module.exports = {
 			{
 				test: /\.js$/,
 				use: 'babel-loader',
-				exclude: /node_modules|bower_components/
+				exclude: /node_modules|thirdparty/
 			},
 			{
 				test: /sap[/\\]ui[/\\]thirdparty[/\\](?:jquery\.js|jquery-mobile-custom\.js)/,
