@@ -3,7 +3,6 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OpenUI5Plugin = require('openui5-webpack-plugin');
-const webpack = require('webpack');
 
 const appPath = path.resolve(__dirname, 'webapp');
 const buildPath = path.resolve(__dirname, 'dist');
@@ -71,7 +70,11 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: 'index.html'
 		}),
-		new OpenUI5Plugin(),
+		new OpenUI5Plugin({
+			modulePath: "sap/ui/demo/todo",
+			libs: ["sap.ui.core", "sap.m"],
+			translations: ["en", "de"]
+		}),
 		new CopyWebpackPlugin([
 			{
 				from: 'css/styles.css',
@@ -102,7 +105,8 @@ module.exports = {
 		]),
 		new BundleAnalyzerPlugin({
 			analyzerMode: 'static',
-			generateStatsFile: true
+			generateStatsFile: true,
+			openAnalyzer: false,
 		})
 	],
 	devtool: 'source-map'
