@@ -1,17 +1,15 @@
 ![OpenUI5 logo](http://openui5.org/images/OpenUI5_new_big_side.png)
 
 # openui5-sample-app
-> [OpenUI5](https://github.com/SAP/openui5) sample app using Grunt, Karma & Bower
+> [OpenUI5](https://github.com/SAP/openui5) sample app using webpack
+
+This repository shows how to build a OpenUI5 app using webpack and the `openui5-webpack-plugin`.
 
 ## Getting started
 * Install Node.js (from [nodejs.org](http://nodejs.org/)).
-* Install the Grunt CLI
-    ```sh
-    npm install --global grunt-cli
-    ```
 * Clone the repository and navigate into it
     ```sh
-    git clone https://github.com/SAP/openui5-sample-app.git
+    git clone https://github.com/cevou/openui5-sample-app.git
     cd openui5-sample-app
     ```
 * Install all npm dependencies (also installs all bower dependencies)
@@ -21,14 +19,23 @@
 
 ## Usage
 ### Server
-Run `grunt serve` to start a local server with your application at [http://localhost:8080](http://localhost:8080).
-
-Run `grunt watch` to also execute your unit tests automatically after every change.
+Run `npm run server` to start a local server with your application at [http://localhost:8080](http://localhost:8080).
 
 ### Code validation
-Run `grunt lint` to run static code checks on your project.
-
-Run `grunt test` to execute all tests and get a coverage report.
+Run `npm run lint` to run static code checks on your project.
 
 ### Build
-Run `grunt build` to build a deployable version of your app to `/dist`.
+Run `npm run webpack` to build a deployable development version of your app to `/dist`.
+Run `npm run webpack:prod` to build a deployable production version of your app to `/dist`.
+
+## TODO
+
+Some things still need to be implemented in the `openui5-webpack` repository:
+
+- Include library-properties.json in build
+- Do not load `library.css` files because styles are build automatically
+- Generate sapContrast classes
+
+Also some things can be improved in this repository:
+
+- Add examples for tests
