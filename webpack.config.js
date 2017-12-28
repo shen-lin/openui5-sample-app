@@ -3,6 +3,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OpenUI5Plugin = require('openui5-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const appPath = path.resolve(__dirname, 'webapp');
 const buildPath = path.resolve(__dirname, 'dist');
@@ -84,6 +85,7 @@ module.exports = {
 		]
 	},
 	plugins: [
+		new CleanWebpackPlugin([buildPath]),
 		new HtmlWebpackPlugin({
 			template: 'index.html'
 		}),
