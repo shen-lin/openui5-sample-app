@@ -103,7 +103,11 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: 'index.html'
 		}),
-		new OpenUI5Plugin(),
+		new OpenUI5Plugin({
+			modulePath: "sap/ui/demo/todo",
+			libs: ["sap.ui.core", "sap.m"],
+			translations: ["en", "de"]
+		}),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'vendor',
 			minChunks: Infinity
