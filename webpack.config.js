@@ -46,8 +46,12 @@ module.exports = {
 				use: 'openui5-theme-loader'
 			},
 			{
+				test: /\.(?:le|c)ss$/,
+				use: ['style-loader', 'css-loader'],
+			},
+			{
 				test: /\.less$/,
-				use: ['style-loader', 'css-loader', 'less-loader'],
+				use: 'less-loader',
 			},
 			{
 				test: /sap[/\\](?:ui[/\\](?:core|layout)|m)[/\\]themes[/\\][^/\\]+[/\\][A-Z][^/\\]+\.less$/,
@@ -75,6 +79,7 @@ module.exports = {
 			"bower_components/openui5-sap.ui.core/resources/sap/ui/thirdparty",
 			"bower_components/openui5-sap.m/resources",
 			"bower_components/openui5-sap.ui.support/resources",
+			"bower_components/openui5-themelib_sap_belize/resources",
 			"node_modules"
 		]
 	},
@@ -89,10 +94,6 @@ module.exports = {
 		}),
 		new CopyWebpackPlugin([
 			{
-				from: 'css/styles.css',
-				to: 'sap/ui/demo/todo/css'
-			},
-			{
 				from: 'model/todoitems.json',
 				to: 'sap/ui/demo/todo/model'
 			},
@@ -101,12 +102,6 @@ module.exports = {
 					glob: 'sap/ui/core/themes/base/fonts/**'
 				},
 				context: path.resolve(__dirname, 'bower_components/openui5-sap.ui.core/resources')
-			},
-			{
-				from: {
-					glob: 'sap/{ui/core,m}/themes/sap_belize/library.css'
-				},
-				context: path.resolve(__dirname, 'bower_components/openui5-themelib_sap_belize/resources')
 			},
 			{
 				from: {

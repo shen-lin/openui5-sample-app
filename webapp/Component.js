@@ -12,6 +12,8 @@ import "./i18n/i18n.properties";
 import "./i18n/i18n_en.properties";
 import "./i18n/i18n_de.properties";
 
+import "./css/styles.css"
+
 export default UIComponent.extend('sap.ui.demo.todo.Component', {
 	metadata: {
 		manifest,

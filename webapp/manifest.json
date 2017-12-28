@@ -26,13 +26,6 @@
 				"type": "sap.ui.model.json.JSONModel",
 				"uri": "model/todoitems.json"
 			}
-		},
-		"resources": {
-			"css": [
-				{
-					"uri": "css/styles.css"
-				}
-			]
 		}
 	}
 }
