@@ -39,7 +39,19 @@ module.exports = {
 			},
 			{
 				test: /bower_components[/\\]openui5-sap.*\.js$/,
-				use: ['openui5-renderer-loader']
+				use: 'openui5-renderer-loader'
+			},
+			{
+				test: /sap[/\\](?:ui[/\\](?:core|layout)|m)[/\\][A-Z][^/\\]+\.js$/,
+				use: 'openui5-theme-loader'
+			},
+			{
+				test: /\.less$/,
+				use: ['style-loader', 'css-loader', 'less-loader'],
+			},
+			{
+				test: /sap[/\\](?:ui[/\\](?:core|layout)|m)[/\\]themes[/\\][^/\\]+[/\\][A-Z][^/\\]+\.less$/,
+				use: 'openui5-theme-base-loader'
 			},
 			{
 				test: /\.xml$/,
