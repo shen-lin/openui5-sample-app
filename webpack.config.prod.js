@@ -10,6 +10,15 @@ const webpack = require('webpack');
 const appPath = path.resolve(__dirname, 'webapp');
 const buildPath = path.resolve(__dirname, 'dist');
 
+const modules = [
+	"bower_components/openui5-sap.ui.core/resources",
+	"bower_components/openui5-sap.ui.core/resources/sap/ui/thirdparty",
+	"bower_components/openui5-sap.m/resources",
+	"bower_components/openui5-sap.ui.support/resources",
+	"bower_components/openui5-themelib_sap_belize/resources",
+	"node_modules"
+];
+
 module.exports = {
 	context: appPath,
 	entry: {
@@ -53,7 +62,12 @@ module.exports = {
 			},
 			{
 				test: /sap[/\\](?:ui[/\\](?:core|layout)|m)[/\\][A-Z][^/\\]+\.js$/,
-				use: 'openui5-theme-loader'
+				use: {
+					loader: 'openui5-theme-loader',
+					options: {
+						modules,
+					}
+				}
 			},
 			{
 				test: /\.css$/,
@@ -66,7 +80,12 @@ module.exports = {
 				test: /sap[/\\](?:ui[/\\](?:core|layout)|m)[/\\]themes[/\\][^/\\]+[/\\][A-Z][^/\\]+\.less$/,
 				use: ExtractTextPlugin.extract({
 					fallback: "style-loader",
-					use: ['css-loader', 'less-loader', 'openui5-theme-base-loader']
+					use: ['css-loader', 'less-loader', {
+						loader: 'openui5-theme-base-loader',
+						options: {
+							modules,
+						}
+					}]
 				}),
 			},
 			{
@@ -86,20 +105,10 @@ module.exports = {
 		publicPath: ''
 	},
 	resolve: {
-		"modules": [
-			"bower_components/openui5-sap.ui.core/resources",
-			"bower_components/openui5-sap.ui.core/resources/sap/ui/thirdparty",
-			"bower_components/openui5-sap.m/resources",
-			"bower_components/openui5-sap.ui.support/resources",
-			"bower_components/openui5-themelib_sap_belize/resources",
-			"node_modules"
-		]
+		modules,
 	},
 	plugins: [
 		new CleanWebpackPlugin([buildPath]),
-		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
-		}),
 		new HtmlWebpackPlugin({
 			template: 'index.html'
 		}),
@@ -108,14 +117,6 @@ module.exports = {
 			libs: ["sap.ui.core", "sap.m"],
 			translations: ["en", "de"]
 		}),
-		new webpack.optimize.CommonsChunkPlugin({
-			name: 'vendor',
-			minChunks: Infinity
-		}),
-		new webpack.optimize.UglifyJsPlugin({
-			sourceMap: true
-		}),
-		new webpack.HashedModuleIdsPlugin(),
 		new ExtractTextPlugin('style.[contenthash].css'),
 		new OptimizeCssAssetsPlugin(),
 		new CopyWebpackPlugin([

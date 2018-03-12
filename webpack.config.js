@@ -8,6 +8,15 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const appPath = path.resolve(__dirname, 'webapp');
 const buildPath = path.resolve(__dirname, 'dist');
 
+const modules = [
+	"bower_components/openui5-sap.ui.core/resources",
+	"bower_components/openui5-sap.ui.core/resources/sap/ui/thirdparty",
+	"bower_components/openui5-sap.m/resources",
+	"bower_components/openui5-sap.ui.support/resources",
+	"bower_components/openui5-themelib_sap_belize/resources",
+	"node_modules"
+];
+
 module.exports = {
 	context: appPath,
 	entry: {
@@ -44,7 +53,12 @@ module.exports = {
 			},
 			{
 				test: /sap[/\\](?:ui[/\\](?:core|layout)|m)[/\\][A-Z][^/\\]+\.js$/,
-				use: 'openui5-theme-loader'
+				use: {
+					loader: 'openui5-theme-loader',
+					options: {
+						modules,
+					}
+				}
 			},
 			{
 				test: /\.(?:le|c)ss$/,
@@ -56,7 +70,12 @@ module.exports = {
 			},
 			{
 				test: /sap[/\\](?:ui[/\\](?:core|layout)|m)[/\\]themes[/\\][^/\\]+[/\\][A-Z][^/\\]+\.less$/,
-				use: 'openui5-theme-base-loader'
+				use: {
+					loader: 'openui5-theme-base-loader',
+					options: {
+						modules,
+					}
+				}
 			},
 			{
 				test: /\.xml$/,
@@ -69,20 +88,10 @@ module.exports = {
 		]
 	},
 	output: {
-		path: path.resolve(buildPath),
-		filename: '[name].js',
-		chunkFilename: '[name].js',
-		publicPath: ''
+		path: path.resolve(buildPath)
 	},
 	resolve: {
-		"modules": [
-			"bower_components/openui5-sap.ui.core/resources",
-			"bower_components/openui5-sap.ui.core/resources/sap/ui/thirdparty",
-			"bower_components/openui5-sap.m/resources",
-			"bower_components/openui5-sap.ui.support/resources",
-			"bower_components/openui5-themelib_sap_belize/resources",
-			"node_modules"
-		]
+		modules,
 	},
 	plugins: [
 		new CleanWebpackPlugin([buildPath]),
@@ -118,5 +127,6 @@ module.exports = {
 			openAnalyzer: false,
 		})
 	],
-	devtool: 'source-map'
+	devtool: 'source-map',
+	mode: 'development'
 };
