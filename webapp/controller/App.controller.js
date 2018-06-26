@@ -2,8 +2,9 @@ sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator"
-], function(Controller, JSONModel, Filter, FilterOperator) {
+	"sap/ui/model/FilterOperator",
+	"jquery.sap.global"
+], function(Controller, JSONModel, Filter, FilterOperator, jQuery) {
 	'use strict';
 
 	return Controller.extend('sap.ui.demo.todo.controller.App', {

@@ -4,61 +4,57 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const OpenUI5Plugin = require('openui5-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const webpack = require('webpack');
 
 const appPath = path.resolve(__dirname, 'webapp');
 const buildPath = path.resolve(__dirname, 'dist');
 
-const modules = [
-	"bower_components/openui5-sap.ui.core/resources",
-	"bower_components/openui5-sap.ui.core/resources/sap/ui/thirdparty",
-	"bower_components/openui5-sap.m/resources",
-	"bower_components/openui5-sap.ui.support/resources",
-	"bower_components/openui5-themelib_sap_belize/resources",
+const rootPaths = [
+	"node_modules/@openui5/sap.m/src",
+	"node_modules/@openui5/sap.ui.core/src",
+	"node_modules/@openui5/sap.ui.core/src/sap/ui/thirdparty", // workaround for signals dependency in hasher
+	"node_modules/@openui5/sap.ui.support/src",
+	"node_modules/@openui5/themelib_sap_belize/src",
 	"node_modules"
 ];
 
 module.exports = {
 	context: appPath,
-	entry: {
-		app: './app.js'
-	},
+	entry: './app.js',
+	mode: process.env.NODE_ENV === "production" ? "production" : "development",
 	module: {
 		rules: [
 			{
 				test: /\.js$/,
 				use: 'babel-loader',
-				exclude: /node_modules|thirdparty/
+				exclude: /node_modules/
 			},
 			{
-				test: /sap[/\\]ui[/\\]thirdparty[/\\](?:jquery\.js|jquery-mobile-custom\.js)/,
-				use: 'script-loader',
-			},
-			{
-				test: /jquery\.sap\.global\.js$/,
+				test: /@openui5[/\\].*\.js$/,
 				use: {
-					loader: 'exports-loader',
-					query: 'jQuery'
+					loader: "openui5-renderer-loader",
+					options: {
+						filterRegEx: /[/\\]src[/\\](.*)\.js$/,
+					},
 				},
 			},
 			{
-				test: /sap[/\\]ui[/\\]Device.js$/,
+				test: [
+					/jquery-ui-position.js$/,
+					// The following has to be fixed in the UI5 core
+					/includeStylesheet.js$/,
+				],
 				use: {
-					loader: 'exports-loader',
-					query: 'window.sap.ui.Device'
-				}
+					loader: "imports-loader",
+					query: "jQuery=sap/ui/thirdparty/jquery",
+				},
 			},
 			{
-				test: /bower_components[/\\]openui5-sap.*\.js$/,
-				use: 'openui5-renderer-loader'
-			},
-			{
-				test: /sap[/\\](?:ui[/\\](?:core|layout)|m)[/\\][A-Z][^/\\]+\.js$/,
+				test: /jquery-mobile-custom.js$/,
 				use: {
-					loader: 'openui5-theme-loader',
-					options: {
-						modules,
-					}
-				}
+					loader: "imports-loader",
+					query: "this=>window",
+				},
 			},
 			{
 				test: /\.(?:le|c)ss$/,
@@ -67,15 +63,6 @@ module.exports = {
 			{
 				test: /\.less$/,
 				use: 'less-loader',
-			},
-			{
-				test: /sap[/\\](?:ui[/\\](?:core|layout)|m)[/\\]themes[/\\][^/\\]+[/\\][A-Z][^/\\]+\.less$/,
-				use: {
-					loader: 'openui5-theme-base-loader',
-					options: {
-						modules,
-					}
-				}
 			},
 			{
 				test: /\.xml$/,
@@ -91,7 +78,7 @@ module.exports = {
 		path: path.resolve(buildPath)
 	},
 	resolve: {
-		modules,
+		modules: rootPaths,
 	},
 	plugins: [
 		new CleanWebpackPlugin([buildPath]),
@@ -100,25 +87,31 @@ module.exports = {
 		}),
 		new OpenUI5Plugin({
 			modulePath: "sap/ui/demo/todo",
+			rootPaths,
 			libs: ["sap.ui.core", "sap.m"],
-			translations: ["en", "de"]
+			translations: ["en", "de"],
+			theme: "sap_belize"
 		}),
+		new webpack.NormalModuleReplacementPlugin(
+			/^sap\/ui\/thirdparty\/URI$/,
+			"urijs"
+		),
 		new CopyWebpackPlugin([
 			{
 				from: 'model/todoitems.json',
 				to: 'sap/ui/demo/todo/model'
 			},
 			{
+				context: path.resolve(__dirname, "node_modules/@openui5/sap.ui.core/src"),
 				from: {
-					glob: 'sap/ui/core/themes/base/fonts/**'
+					glob: "sap/ui/core/themes/base/fonts/**",
 				},
-				context: path.resolve(__dirname, 'bower_components/openui5-sap.ui.core/resources')
 			},
 			{
+				context: path.resolve(__dirname, "node_modules/@openui5/themelib_sap_belize/src"),
 				from: {
-					glob: 'sap/{ui/core,m}/themes/sap_belize/library-parameters.json'
+					glob: "sap/ui/core/themes/sap_belize/fonts/**",
 				},
-				context: path.resolve(__dirname, 'bower_components/openui5-themelib_sap_belize/resources')
 			}
 		]),
 		new BundleAnalyzerPlugin({
@@ -128,5 +121,4 @@ module.exports = {
 		})
 	],
 	devtool: 'source-map',
-	mode: 'development'
 };
