@@ -39,11 +39,11 @@ module.exports = {
 				use: 'babel-loader',
 				exclude: /node_modules|thirdparty/
 			}, {
-				test: /@openui5[/\\].*\.js$/,
+				test: /ui5_1.54[/\\].*\.js$/,
 				use: {
 					loader: "openui5-renderer-loader",
 					options: {
-						filterRegEx: /[/\\]src[/\\](.*)\.js$/
+						filterRegEx: /[/\\]resources[/\\](.*)\.js$/
 					}
 				}
 			}, {
