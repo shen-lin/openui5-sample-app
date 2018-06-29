@@ -10,9 +10,9 @@ const appPath = path.resolve(__dirname, 'webapp');
 const buildPath = path.resolve(__dirname, 'dist');
 
 const rootPaths = [
-	"node_modules/@openui5/sap.m/src", "node_modules/@openui5/sap.ui.core/src", "node_modules/@openui5/sap.ui.core/src/sap/ui/thirdparty", // workaround for signals dependency in hasher
-	"node_modules/@openui5/sap.ui.support/src",
-	"node_modules/@openui5/themelib_sap_belize/src",
+	"node_modules/ui5/sap.m/src", "node_modules/ui5/sap.ui.core/src", "node_modules/ui5/sap.ui.core/src/sap/ui/thirdparty", // workaround for signals dependency in hasher
+	"node_modules/ui5/sap.ui.support/src",
+	"node_modules/ui5/themelib_sap_belize/src",
 	"node_modules"
 ];
 
@@ -29,7 +29,7 @@ module.exports = {
 				use: 'babel-loader',
 				exclude: /node_modules/
 			}, {
-				test: /@openui5[/\\].*\.js$/,
+				test: /ui5[/\\].*\.js$/,
 				use: {
 					loader: "openui5-renderer-loader",
 					options: {
@@ -40,7 +40,9 @@ module.exports = {
 				test: [
 					/jquery-ui-position.js$/,
 					// The following has to be fixed in the UI5 core
-					/includeStylesheet.js$/
+					/includeStylesheet.js$/,
+					/Mobile.js$/,
+					/Selection.js$/
 				],
 				use: {
 					loader: "imports-loader",
@@ -96,15 +98,12 @@ module.exports = {
 				from: 'model/todoitems.json',
 				to: 'sap/ui/demo/todo/model'
 			}, {
-				context: path.resolve(__dirname, "node_modules/@openui5/sap.ui.core/src"),
+				context: path.resolve(__dirname, "node_modules/ui5/sap.ui.core/src"),
 				from: {
 					glob: "sap/ui/core/themes/base/fonts/**"
 				}
 			}, {
-				context: path.resolve(
-					__dirname,
-					"node_modules/@openui5/themelib_sap_belize/src"
-				),
+				context: path.resolve(__dirname, "node_modules/ui5/themelib_sap_belize/src"),
 				from: {
 					glob: "sap/ui/core/themes/sap_belize/fonts/**"
 				}
