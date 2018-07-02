@@ -55,12 +55,14 @@ module.exports = {
 					query: "this=>window"
 				}
 			}, {
-				test: /\.(?:le|c)ss$/,
+				test: /\.css$/,
 				use: ['style-loader', 'css-loader']
-			}, {
-				test: /\.less$/,
-				use: 'less-loader'
-			}, {
+			},
+			// {
+			//
+			// test: /\.css$/, 	use: ['style-loader', 'css-loader'] }, { 	test: /\.less$/,
+			// use: 'less-loader' },
+			{
 				test: /\.xml$/,
 				use: 'openui5-xml-loader'
 			}, {
@@ -84,10 +86,9 @@ module.exports = {
 			libs: [
 				"sap.ui.core", "sap.m"
 			],
-			translations: [
-				"en", "de"
-			],
-			theme: "sap_belize"
+			translations: ["en", "de"]
+			// Avoid error parsing library.source.less file in SAPUI5. Removed {code}theme:
+			// "sap_belize"{code}
 		}),
 		new webpack.NormalModuleReplacementPlugin(
 			/^sap\/ui\/thirdparty\/URI$/,
