@@ -39,3 +39,22 @@ Some things still need to be implemented in the `openui5-webpack` repository:
 Also some things can be improved in this repository:
 
 - Add examples for tests
+
+
+### OpenUI5 webpack code structure
+
+## openui5-webpack
+
+- Entry point: OpenUI5Plugin, register the hooks when parsing the source repository.
+- OpenUI5DefineDependencyParserPlugin: it parses dependencies declared in sap.ui.define statements.
+- OpenUI5RequireDependencyParserPlugin: it parses dependencies in the following expressions:
+    - jQuery.sap.require - OpenUI5RequireItemDependency / dynamic load attempt
+    - $.sap.require - Similar to jQuery.sap.require
+    - sap.ui.requireSync - OpenUI5RequireItemDependency
+    - lazyInstanceOf - OpenUI5LazyInstanceDependency
+    - createView - OpenUI5ViewDependency
+- OpenUI5ResourceDependencyParserPlugin    
+    - jQuery.sap.loadResource - OpenUI5ResourceDependency
+
+## openui5-xml-loader
+    It parses XML view, extract attributes and convert to UI5 require statements
