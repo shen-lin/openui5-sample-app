@@ -10,8 +10,9 @@ const appPath = path.resolve(__dirname, 'webapp');
 const buildPath = path.resolve(__dirname, 'dist');
 
 const rootPaths = [
-	"node_modules/ui5_1.54/resources", "node_modules/ui5_1.54/resources/sap/ui/core", "node_modules/ui5_1.54/resources/sap/m", "node_modules/ui5_1.54/resources/sap/ui/thirdparty", // workaround for signals dependency in hasher
+	"node_modules/ui5_1.54/resources/sap/ui/core", "node_modules/ui5_1.54/resources/sap/m", "node_modules/ui5_1.54/resources/sap/ui/thirdparty", // workaround for signals dependency in hasher
 	"node_modules/ui5_1.54/resources/sap/ui/support",
+	"node_modules/ui5_1.54/resources",
 	"node_modules"
 ];
 
@@ -57,12 +58,10 @@ module.exports = {
 			}, {
 				test: /\.css$/,
 				use: ['style-loader', 'css-loader']
-			},
-			// {
-			//
-			// test: /\.css$/, 	use: ['style-loader', 'css-loader'] }, { 	test: /\.less$/,
-			// use: 'less-loader' },
-			{
+			}, {
+				test: /\.less$/,
+				use: 'less-loader'
+			}, {
 				test: /\.xml$/,
 				use: 'openui5-xml-loader'
 			}, {
@@ -75,7 +74,8 @@ module.exports = {
 		path: path.resolve(buildPath)
 	},
 	resolve: {
-		modules: rootPaths
+		modules: rootPaths,
+		extensions: ['.js', '.properties', '.json', '.xml', '.css']
 	},
 	plugins: [
 		new CleanWebpackPlugin([buildPath]),
