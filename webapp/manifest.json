@@ -1,6 +1,6 @@
 {
 	"sap.app": {
-		"id": "sap.ui.demo.todo",
+		"id": "sap.se.ui",
 		"type": "application"
 	},
 	"sap.ui5": {
@@ -11,7 +11,7 @@
 			}
 		},
 		"rootView": {
-			"viewName": "sap.ui.demo.todo.view.App",
+			"viewName": "sap.se.ui.view.App",
 			"type": "XML",
 			"id": "app"
 		},
@@ -19,12 +19,11 @@
 			"i18n": {
 				"type": "sap.ui.model.resource.ResourceModel",
 				"settings": {
-					"bundleName": "sap.ui.demo.todo.i18n.i18n"
+					"bundleName": "sap.se.ui.i18n.i18n"
 				}
 			},
-			"": {
-				"type": "sap.ui.model.json.JSONModel",
-				"uri": "model/todoitems.json"
+			"ScreenState": {
+				"type": "sap.ui.model.json.JSONModel"
 			}
 		}
 	}

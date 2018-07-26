@@ -29,6 +29,6 @@ import "./css/styles.css"
 import "@openui5/sap.ui.core/src/sap/ui/dom/jquery/Focusable";
 import "@openui5/sap.ui.core/src/jquery.sap.dom";
 
-export default UIComponent.extend('sap.ui.demo.todo.Component', {metadata: {
+export default UIComponent.extend('sap.se.ui.Component', {metadata: {
 		manifest
 	}});

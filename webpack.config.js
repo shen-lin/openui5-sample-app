@@ -79,7 +79,7 @@ module.exports = {
 		new CleanWebpackPlugin([buildPath]),
 		new HtmlWebpackPlugin({template: 'index.html'}),
 		new OpenUI5Plugin({
-			modulePath: "sap/ui/demo/todo",
+			modulePath: "sap/se/ui",
 			rootPaths,
 			libs: [
 				"sap.ui.core", "sap.m"
