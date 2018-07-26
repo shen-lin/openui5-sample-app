@@ -96,7 +96,7 @@ module.exports = {
 		new CopyWebpackPlugin([
 			{
 				from: 'model/todoitems.json',
-				to: 'sap/ui/demo/todo/model'
+				to: 'sap/se/ui/model'
 			}, {
 				context: path.resolve(__dirname, "node_modules/@openui5/sap.ui.core/src"),
 				from: {

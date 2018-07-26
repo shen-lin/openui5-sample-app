@@ -47,7 +47,7 @@ function(Controller, JSONModel, Filter, FilterOperator, jQuery) {
 		 * Updates the number of items not yet completed
 		 */
 			updateItemsLeftCount: function() {
-				var oModel = this.getView().getModel();
+				var oModel = this.getView().getModel("ScreenState");
 				var aTodos = oModel.getProperty('/todos') || [];
 
 				var iItemsLeft = aTodos.filter(function(oTodo) {
