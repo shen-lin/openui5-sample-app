@@ -10,9 +10,9 @@ const appPath = path.resolve(__dirname, 'webapp');
 const buildPath = path.resolve(__dirname, 'dist');
 
 const rootPaths = [
-	"node_modules/ui5/sap.m/src", "node_modules/ui5/sap.ui.core/src", "node_modules/ui5/sap.ui.core/src/sap/ui/thirdparty", // workaround for signals dependency in hasher
-	"node_modules/ui5/sap.ui.support/src",
-	"node_modules/ui5/themelib_sap_belize/src",
+	"node_modules/@openui5/sap.m/src", "node_modules/@openui5/sap.ui.core/src", "node_modules/@openui5/sap.ui.core/src/sap/ui/thirdparty", // workaround for signals dependency in hasher
+	"node_modules/@openui5/sap.ui.support/src",
+	"node_modules/@openui5/themelib_sap_belize/src",
 	"node_modules"
 ];
 
@@ -29,7 +29,7 @@ module.exports = {
 				use: 'babel-loader',
 				exclude: /node_modules/
 			}, {
-				test: /ui5[/\\].*\.js$/,
+				test: /@openui5[/\\].*\.js$/,
 				use: {
 					loader: "openui5-renderer-loader",
 					options: {
@@ -98,12 +98,15 @@ module.exports = {
 				from: 'model/todoitems.json',
 				to: 'sap/ui/demo/todo/model'
 			}, {
-				context: path.resolve(__dirname, "node_modules/ui5/sap.ui.core/src"),
+				context: path.resolve(__dirname, "node_modules/@openui5/sap.ui.core/src"),
 				from: {
 					glob: "sap/ui/core/themes/base/fonts/**"
 				}
 			}, {
-				context: path.resolve(__dirname, "node_modules/ui5/themelib_sap_belize/src"),
+				context: path.resolve(
+					__dirname,
+					"node_modules/@openui5/themelib_sap_belize/src"
+				),
 				from: {
 					glob: "sap/ui/core/themes/sap_belize/fonts/**"
 				}
