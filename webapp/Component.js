@@ -1,13 +1,12 @@
 import UIComponent from "@openui5/sap.ui.core/src/sap/ui/core/UIComponent";
 import manifest from "./manifest";
 
-// Load libraries
-import "@openui5/sap.ui.core/src/sap/ui/core/library";
+// Load libraries import "@openui5/sap.ui.core/src/sap/ui/core/library";
 import "@openui5/sap.ui.core/src/sap/ui/core/messagebundle.properties";
 import "@openui5/sap.ui.core/src/sap/ui/core/messagebundle_en.properties";
 import "@openui5/sap.ui.core/src/sap/ui/core/messagebundle_de.properties";
 
-import "@openui5/sap.m/src/sap/m/library";
+//import "@openui5/sap.m/src/sap/m/library";
 import "@openui5/sap.m/src/sap/m/messagebundle.properties";
 import "@openui5/sap.m/src/sap/m/messagebundle_en.properties";
 import "@openui5/sap.m/src/sap/m/messagebundle_de.properties";
