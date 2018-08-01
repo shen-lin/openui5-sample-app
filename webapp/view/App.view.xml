@@ -1,7 +1,7 @@
 <mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="sap.se.ui.controller.App" displayBlock="true">
-
 		<App>
-			<Page title="{i18n>TITLE}" backgroundDesign="Solid">
+			<Page title="{i18n>TITLE}" backgroundDesign="Solid"
+				content="{ path: 'ScreenState>/cs/0/cs/5/cs', factory: '.createControl' }">
 				<footer>
 					<Bar/>
 				</footer>

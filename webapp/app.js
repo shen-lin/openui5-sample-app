@@ -9,4 +9,6 @@ import AppComponent from "./Component";
 
 sap.ui.getCore().boot();
 
-new ComponentContainer({component: new AppComponent()}).placeAt("root");
+new ComponentContainer({component: new AppComponent(), propagateModel: true}).placeAt(
+	"root"
+);

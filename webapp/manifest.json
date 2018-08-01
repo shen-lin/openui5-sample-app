@@ -24,6 +24,10 @@
 			},
 			"ScreenState": {
 				"type": "sap.ui.model.json.JSONModel",
+				"uri": "model/screenstate.json"
+			},
+			"": {
+				"type": "sap.ui.model.json.JSONModel",
 				"uri": "model/todoitems.json"
 			}
 		}

@@ -6787,52 +6787,7 @@
 											"ColumnIndex": "1",
 											"TrackSize": "false"
 										},
-										"cs": [{
-											"ps": {
-												"Type": "SAPGUI.ImageCtrl.1",
-												"Id": "ses[0]/wnd[0]/usrUSRAREA/ctlcntIMAGE_CONTAINER/cntIMAGE_CONTAINER/splitcnt/cell[1][0]/img",
-												"Sid": "wnd[0]/usr/cntlIMAGE_CONTAINER/shellcont/shell/shellcont[1]/shell",
-												"Value": "SAPR3://106/WebRepository/0020270862/Z_PERSONAS_LOGO?Version=00001",
-												"ControlStyle": "23",
-												"OmrtId": "106",
-												"Alignment": "15",
-												"X": "0",
-												"Y": "0",
-												"Width": "1064",
-												"Height": "768",
-												"Metric": "1",
-												"Url": "SAPR3://106/WebRepository/0020270862/Z_PERSONAS_LOGO?Version=00001",
-												"UrlEncoded": "U0FQUjM6Ly8xMDYvV2ViUmVwb3NpdG9yeS8wMDIwMjcwODYyL1pfUEVSU09OQVNfTE9HTz9WZXJzaW9uPTAwMDAx",
-												"AltText": "",
-												"DisplayMode": "3",
-												"Has3DBorder": "false",
-												"IsSapIcon": "false",
-												"ImageVisible": "true",
-												"ImageWidth": "300",
-												"ImageHeight": "300"
-											},
-											"actions": [{
-													"id": "71",
-													"flushing": "false",
-													"ignored": "true"
-												},
-												{
-													"id": "72",
-													"flushing": "false",
-													"ignored": "true"
-												},
-												{
-													"id": "73",
-													"flushing": "false",
-													"ignored": "true"
-												},
-												{
-													"id": "74",
-													"flushing": "false",
-													"ignored": "true"
-												}
-											]
-										}]
+										"cs": []
 									}
 								]
 							}]

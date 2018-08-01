@@ -98,6 +98,12 @@ module.exports = {
 				from: 'model/todoitems.json',
 				to: 'sap/se/ui/model'
 			}, {
+				from: 'model/screenstate.json',
+				to: 'sap/se/ui/model'
+			}, {
+				from: 'model/screenstateNew.json',
+				to: 'sap/se/ui/model'
+			}, {
 				context: path.resolve(__dirname, "node_modules/@openui5/sap.ui.core/src"),
 				from: {
 					glob: "sap/ui/core/themes/base/fonts/**"
